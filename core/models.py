@@ -24,18 +24,13 @@ class Projeto(models.Model):
         return self.nome
 
 
-class Registro(models.Model):
-    nome = models.CharField(max_length=120)
-    descricao = models.TextField()
-
-
 class Filtro(models.Model):
     nome = models.CharField(max_length=150)
     CATEGORIA_TAREFA = (
-        (0, "Tarefa Normal"),
-        (1, "Atenção"),
-        (2, "Importante"),
-        (3, "Urgente")
+        ("0", "Tarefa Normal"),
+        ("1", "Atenção"),
+        ("2", "Importante"),
+        ("3", "Urgente")
     )
     status = models.CharField(
         max_length=1,
@@ -63,10 +58,10 @@ class Equipe(models.Model):
 class Tarefa(models.Model):
 
     STATUS_TAREFA = (
-        (0, "ABERTA"),
-        (1, "TRABALHANDO"),
-        (2, "PAUSADA"),
-        (3, "CONCLUíDA")
+        ("0", "ABERTA"),
+        ("1", "TRABALHANDO"),
+        ("2", "PAUSADA"),
+        ("3", "CONCLUíDA")
     )
 
     titulo = models.CharField(max_length=50)
@@ -87,12 +82,6 @@ class Tarefa(models.Model):
         Profile,
         null=True,
         on_delete=models.SET_NULL)
-    pre_requisito = models.ManyToManyField(
-        "self",
-        symmetrical=False,
-        related_name="pre_requisitos"
-    )
-
     class Meta:
         db_table = "tarefa"
 
