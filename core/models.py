@@ -92,7 +92,8 @@ class Checklist(models.Model):
     task = models.ForeignKey(
         Task,
         on_delete=models.CASCADE,
-        related_name="checklists"
+        related_name="checklists",
+        null=True
     )
 
     class Meta:
@@ -124,11 +125,12 @@ class Comment(models.Model):
     task = models.ForeignKey(
         Task,
         on_delete=models.CASCADE,
-        related_name="comentarios"
+        related_name="comentarios",
+        null=True
     )
     created_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created_in = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "comentario"
-        ordering = ['-criado_em']
+        ordering = ['-created_in']
