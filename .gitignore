@@ -1,6 +1,8 @@
 .venv
 __init__.py
-__pycache__
+/__pycache__/
 iago
 iago.pub
+*_initial.py
 migrations
+db.sqlite3

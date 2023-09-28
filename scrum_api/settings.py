@@ -40,6 +40,7 @@ DJANGO_APPS = [
 ]
 EXTERNAL_APPS = [
     'rest_framework',
+    'corsheaders',
 ]
 MY_APPS = [
     'core',
@@ -49,6 +50,8 @@ MY_APPS = [
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + MY_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -122,7 +125,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+     'http://localhost:5173',
+]
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',  # Include 'OPTIONS' for preflight requests
+]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10

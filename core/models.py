@@ -1,15 +1,12 @@
 from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
-from datetime import timedelta
 from usuario.models import Profile
 
 
-class Projeto(models.Model):
-    nome = models.CharField(max_length=50)
-    descricao = models.TextField()
-    data_de_criação = models.DateField(auto_now_add=True, null=True, blank=True)
-    data_final = models.DateField(blank=True, null=True)
+class Project(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+    data_de_criação = models.DateField(auto_now_add=True, null=True, blank='')
+    creation_date = models.DateField(blank=True, null=True)
     profile = models.ForeignKey(
         Profile,
         models.CASCADE,
@@ -24,9 +21,9 @@ class Projeto(models.Model):
         return self.nome
 
 
-class Filtro(models.Model):
-    nome = models.CharField(max_length=150)
-    CATEGORIA_TAREFA = (
+class Filter(models.Model):
+    category_name = models.CharField(max_length=150)
+    TASK_CATEGORY = (
         ("0", "Tarefa Normal"),
         ("1", "Atenção"),
         ("2", "Importante"),
@@ -35,53 +32,54 @@ class Filtro(models.Model):
     status = models.CharField(
         max_length=1,
         default=0,
-        choices=CATEGORIA_TAREFA
+        choices=TASK_CATEGORY
         )
 
 
-class Equipe(models.Model):
-    nome = models.CharField(max_length=50)
-    projeto = models.ForeignKey(
-        Projeto,
+class Team(models.Model):
+    team_name = models.CharField(max_length=50)
+    project = models.ForeignKey(
+        Project,
         on_delete=models.CASCADE,
         related_name="equipes"
     )
-    membros = models.ManyToManyField(Profile)
+    menbers = models.ManyToManyField(Profile)
 
     def __str__(self):
-        return self.nome
+        return self.team_name
 
     class Meta:
-        db_table = "equipe"
+        db_table = "team"
 
 
-class Tarefa(models.Model):
+class Task(models.Model):
 
-    STATUS_TAREFA = (
+    TASK_STATUS = (
         ("0", "ABERTA"),
         ("1", "TRABALHANDO"),
         ("2", "PAUSADA"),
         ("3", "CONCLUíDA")
     )
 
-    titulo = models.CharField(max_length=50)
-    descricao = models.CharField(max_length=100)
-    data_conclusao = models.DateTimeField(null=True)
-    projeto = models.ForeignKey(
-        Projeto,
+    task_title = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
+    completion_date = models.DateTimeField(null=True)
+    project = models.ForeignKey(
+        Project,
         on_delete=models.CASCADE,
         related_name="tarefas"
     )
-    horario_de_inicio_atual = models.DateTimeField(null=True)
-    duracao_total = models.DurationField(
+    current_start_time = models.DateTimeField(
+        null=True, auto_now_add=True)
+    total_duration = models.DurationField(
         null=True,
-        default=timedelta(seconds=0)
     )
-    status = models.CharField(max_length=1, default=0, choices=STATUS_TAREFA)
-    responsavel = models.ForeignKey(
+    status = models.CharField(max_length=1, default=0, choices=TASK_STATUS)
+    responsible = models.ForeignKey(
         Profile,
         null=True,
         on_delete=models.SET_NULL)
+
     class Meta:
         db_table = "tarefa"
 
@@ -90,9 +88,9 @@ class Tarefa(models.Model):
 
 
 class Checklist(models.Model):
-    descricao = models.CharField(max_length=50)
-    tarefa = models.ForeignKey(
-        Tarefa,
+    description = models.CharField(max_length=50)
+    task = models.ForeignKey(
+        Task,
         on_delete=models.CASCADE,
         related_name="checklists"
     )
@@ -101,11 +99,11 @@ class Checklist(models.Model):
         db_table = "checklist"
 
     def __str__(self):
-        return self.descricao
+        return self.description
 
 
 class Item(models.Model):
-    descricao = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
     status = models.BooleanField(default=False)
     checklist = models.ForeignKey(
         Checklist,
@@ -120,16 +118,16 @@ class Item(models.Model):
         return "{}, {}".format(self.descricao, self.status)
 
 
-class Comentario(models.Model):
+class Comment(models.Model):
 
-    conteudo = models.TextField()
-    tarefa = models.ForeignKey(
-        Tarefa,
+    content = models.TextField()
+    task = models.ForeignKey(
+        Task,
         on_delete=models.CASCADE,
         related_name="comentarios"
     )
-    criado_por = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    criado_em = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    created_in = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "comentario"

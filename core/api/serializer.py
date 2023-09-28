@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from usuario.models import Profile
 from core.models import *
+from django.contrib.auth.models import User
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -9,23 +10,28 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
+        
+        username = serializers.CharField(source=User.username)
+        email = serializers.EmailField(source=User.email)
+        first_name = serializers.CharField(source=User.first_name)
+        last_name = serializers.CharField(source=User.last_name)
 
 
-class ProjetoSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Projeto
+        model = Project
         fields = '__all__'
 
 
-class EquipeSerializer(serializers.ModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Equipe
+        model = Team
         fields = '__all__'
 
 
-class TarefaSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tarefa
+        model = Task
         fields = '__all__'
 
 
@@ -35,7 +41,7 @@ class ChecklistSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ComentarioSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comentario
+        model = Comment
         fields = '__all__'

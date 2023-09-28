@@ -4,7 +4,6 @@ from .serializer import *
 from usuario.models import Profile
 from core.models import *
 from rest_framework import status
-from ..models import Projeto
 
 
 @api_view()
@@ -28,16 +27,16 @@ def detail_profile_api(request, pk):
 
 @api_view()
 def project_list(request):
-    project = Projeto.objects.all()
-    serializer = ProjetoSerializer(instance=project, many=True)
+    project = Project.objects.all()
+    serializer = ProjectSerializer(instance=project, many=True)
     return Response(serializer.data)
 
 
 @api_view()
 def detail_project(request, pk):
-    profile = Projeto.objects.filter(pk=pk).first()
+    profile = Project.objects.filter(pk=pk).first()
     if profile:
-        serializer = ProjetoSerializer(instance=profile, many=False)
+        serializer = ProjectSerializer(instance=profile, many=False)
         return Response(serializer.data)
     else:
         return Response({'EITA:NÂO DEU CERTO'},
@@ -47,16 +46,16 @@ def detail_project(request, pk):
 
 @api_view()
 def equipe_list(request):
-    project = Equipe.objects.all()
-    serializer = EquipeSerializer(instance=project, many=True)
+    project = Team.objects.all()
+    serializer = TeamSerializer(instance=project, many=True)
     return Response(serializer.data)
 
 
 @api_view()
 def detail_equipe(request, pk):
-    profile = Equipe.objects.filter(pk=pk).first()
+    profile = Team.objects.filter(pk=pk).first()
     if profile:
-        serializer = EquipeSerializer(instance=profile, many=False)
+        serializer = TeamSerializer(instance=profile, many=False)
         return Response(serializer.data)
     else:
         return Response({'EITA:NÂO DEU CERTO'},
@@ -66,16 +65,16 @@ def detail_equipe(request, pk):
 
 @api_view()
 def tarefa_list(request):
-    project = Tarefa.objects.all()
-    serializer = TarefaSerializer(instance=project, many=True)
+    project = Task.objects.all()
+    serializer = TaskSerializer(instance=project, many=True)
     return Response(serializer.data)
 
 
 @api_view()
 def detail_tarefa(request, pk):
-    profile = Tarefa.objects.filter(pk=pk).first()
+    profile = Task.objects.filter(pk=pk).first()
     if profile:
-        serializer = TarefaSerializer(instance=profile, many=False)
+        serializer = TaskSerializer(instance=profile, many=False)
         return Response(serializer.data)
     else:
         return Response({'EITA:NÂO DEU CERTO'},
@@ -104,16 +103,16 @@ def detail_checklist(request, pk):
 
 @api_view()
 def comentario_list(request):
-    project = Comentario.objects.all()
-    serializer = ComentarioSerializer(instance=project, many=True)
+    project = Comment.objects.all()
+    serializer = CommentSerializer(instance=project, many=True)
     return Response(serializer.data)
 
 
 @api_view()
 def detail_comentario(request, pk):
-    profile = Comentario.objects.filter(pk=pk).first()
+    profile = Comment.objects.filter(pk=pk).first()
     if profile:
-        serializer = ComentarioSerializer(instance=profile, many=False)
+        serializer = CommentSerializer(instance=profile, many=False)
         return Response(serializer.data)
     else:
         return Response({'EITA:NÂO DEU CERTO'},

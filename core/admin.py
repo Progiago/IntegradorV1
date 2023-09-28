@@ -3,22 +3,22 @@ from .models import *
 # Register your models here.
 
 
-@admin.register(Projeto)
+@admin.register(Project)
 class ProjetoAdmin(admin.ModelAdmin):
     ...
 
 
-@admin.register(Filtro)
+@admin.register(Filter)
 class FiltroAdmin(admin.ModelAdmin):
     ...
 
 
-@admin.register(Equipe)
+@admin.register(Team)
 class EquipeAdmin(admin.ModelAdmin):
     ...
 
 
-@admin.register(Tarefa)
+@admin.register(Task)
 class TarefaAdmin(admin.ModelAdmin):
     ...
 
