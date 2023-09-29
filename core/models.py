@@ -5,8 +5,7 @@ from usuario.models import Profile
 class Project(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    data_de_criação = models.DateField(auto_now_add=True, null=True, blank='')
-    creation_date = models.DateField(blank=True, null=True)
+    creation_date = models.DateField(auto_now_add=True, null=True, blank='')
     profile = models.ForeignKey(
         Profile,
         models.CASCADE,
