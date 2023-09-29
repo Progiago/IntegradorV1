@@ -5,11 +5,11 @@ from core.api import api
 app_name = 'recipes'
 
 urlpatterns = [
-    path('', api.list_profile_api, name="api"),
-    path('<int:pk>', api.detail_profile_api, name="api"),
-    path('project/', api.project_list, name="api"),
-    path('project/<int:pk>', api.detail_project, name="api"),
-    path('equipe/', api.equipe_list, name="api"),
+    path('', api.List_profile, name="api"),
+    path('<int:pk>', api.Detail_profile, name="api"),
+    path('project/', api.Project_List, name="api"),
+    path('project/<int:pk>', api.Detail_project, name="api"),
+    path('equipe/', api.Team_List, name="api"),
     path('equipe/<int:pk>', api.detail_equipe, name="api"),
     path('tarefa/', api.tarefa_list, name="api"),
     path('tarefa/<int:pk>', api.detail_tarefa, name="api"),
