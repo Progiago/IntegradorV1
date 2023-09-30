@@ -47,7 +47,3 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class Html_reciverSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Html_reciver
-        fields = ['html_content']

@@ -411,15 +411,3 @@ class Detail_Comment(APIView):
 #         return Response({'EITA:NÂO DEU CERTO'},
 #                         status=status.HTTP_404_NOT_FOUND
 #                         )
-class Html_reciver_List(APIView):
-    def get(self, request, format=None):
-        comment = Html_reciver.objects.all()
-        serializer = Html_reciverSerializer(comment, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = Html_reciverSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
