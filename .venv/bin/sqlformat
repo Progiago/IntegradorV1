@@ -1,4 +1,4 @@
-#!/home/iago/Downloads/pi/FinalV1/.venv/bin/python
+#!/home/iago/Downloads/pi/IntegradorV1/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
