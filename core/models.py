@@ -79,7 +79,7 @@ class Task(models.Model):
         db_table = "task"
 
     def __str__(self):
-        return "{}, {}".format(self.titulo, self.status)
+        return "{}, {}".format(self.task_title, self.status)
 
 
 class Checklist(models.Model):
