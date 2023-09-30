@@ -17,5 +17,4 @@ urlpatterns = [
     path('checklist/<int:pk>', api.Detail_Task.as_view()),
     path('comentarios/', api.Comment_List.as_view()),
     path('comentario/<int:pk>', api.Detail_Comment.as_view()),
-    path('html', api.Html_reciver_List.as_view())
 ]
