@@ -63,6 +63,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'scrum_api.urls'
 
+# AUTH_USER_MODEL = 'usuario.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
