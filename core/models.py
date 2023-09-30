@@ -80,7 +80,7 @@ class Task(models.Model):
         on_delete=models.SET_NULL)
 
     class Meta:
-        db_table = "tarefa"
+        db_table = "task"
 
     def __str__(self):
         return "{}, {}".format(self.titulo, self.status)
