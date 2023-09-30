@@ -62,16 +62,16 @@ class Task(models.Model):
 
     task_title = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
-    completion_date = models.DateTimeField(null=True)
+    completion_date = models.DateTimeField(null=True, blank='')
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
         related_name="tarefas"
     )
     current_start_time = models.DateTimeField(
-        null=True, auto_now_add=True)
+       null=True, blank='', auto_now_add=True)
     total_duration = models.DurationField(
-        null=True,
+        null=True, blank=''
     )
     status = models.CharField(max_length=1, default=0, choices=TASK_STATUS)
     responsible = models.ForeignKey(
