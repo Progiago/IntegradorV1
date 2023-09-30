@@ -1,6 +1,6 @@
 from django.db import models
 from usuario.models import Profile
-import jsonfield
+
 
 class Project(models.Model):
     title = models.CharField(max_length=50)
@@ -133,11 +133,4 @@ class Comment(models.Model):
     class Meta:
         db_table = "comentario"
         ordering = ['-created_in']
-        
-        
-class Html_reciver(models.Model):
-    title = models.CharField(("title content"), max_length=150)
-    key = models.CharField()
-    type = models.CharField()
-    
     
