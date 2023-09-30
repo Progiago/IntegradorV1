@@ -17,7 +17,7 @@ class Project(models.Model):
         db_table = "projeto"
 
     def __str__(self):
-        return self.nome
+        return self.title
 
 
 class Filter(models.Model):
