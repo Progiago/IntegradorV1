@@ -411,3 +411,13 @@ class Detail_Comment(APIView):
 #         return Response({'EITA:NÂO DEU CERTO'},
 #                         status=status.HTTP_404_NOT_FOUND
 #                         )
+class ProjectToTask(APIView):
+    def get_profile(self, project):
+        task = Task.objects.filter(project=project)
+        return task
+    
+    def get(self, request, project):
+        task = self.get_profile(project)
+        serializer = TaskSerializer(instance=task, many=True)
+        return Response(serializer.data)
+        

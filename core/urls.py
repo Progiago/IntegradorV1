@@ -17,4 +17,5 @@ urlpatterns = [
     path('checklist/<int:pk>', api.Detail_Task.as_view()),
     path('comentarios/', api.Comment_List.as_view()),
     path('comentario/<int:pk>', api.Detail_Comment.as_view()),
+    path('project/<int:project>/tarefa', api.ProjectToTask.as_view()),
 ]
