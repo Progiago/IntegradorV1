@@ -1,5 +1,6 @@
 from django.db import models
 from usuario.models import Profile
+from django.contrib.auth.models import User
 
 
 class Project(models.Model):
@@ -7,7 +8,7 @@ class Project(models.Model):
     description = models.TextField()
     creation_date = models.DateField(auto_now_add=True, null=True, blank='')
     profile = models.ForeignKey(
-        Profile,
+        User,
         models.CASCADE,
         blank=True,
         null=True
@@ -42,7 +43,7 @@ class Team(models.Model):
         on_delete=models.CASCADE,
         related_name="equipes"
     )
-    menbers = models.ManyToManyField(Profile)
+    menbers = models.ManyToManyField(User)
 
     def __str__(self):
         return self.team_name
@@ -70,7 +71,7 @@ class Task(models.Model):
        null=True, blank='', auto_now_add=True)
     status = models.CharField(max_length=1, default=0, choices=TASK_STATUS)
     responsible = models.ForeignKey(
-        Profile,
+        User,
         null=True,
         on_delete=models.SET_NULL)
 
@@ -122,7 +123,7 @@ class Comment(models.Model):
         related_name="comentarios",
         null=True
     )
-    created_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_in = models.DateTimeField(auto_now=True)
 
     class Meta:
