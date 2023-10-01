@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'password', 'email', 'last_name'] 
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()
 
