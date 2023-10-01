@@ -56,7 +56,6 @@ class Task(models.Model):
     TASK_STATUS = (
         ("0", "ABERTA"),
         ("1", "TRABALHANDO"),
-        ("2", "PAUSADA"),
         ("3", "CONCLUíDA")
     )
 

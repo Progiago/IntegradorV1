@@ -3,6 +3,7 @@ from .models import Profile
 # Register your models here.
 
 
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    ...
+class ProfileAdmin(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name = 'profile'
