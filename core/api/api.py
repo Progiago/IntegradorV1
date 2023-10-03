@@ -249,11 +249,11 @@ class ProjectToTask(APIView):
 
 
 class UserToProject(APIView):
-    def get_user(self, project):
-        user = User.objects.filter(project=project)
+    def get_user(self, profile):
+        user = Project.objects.filter(profile=profile)
         return user
 
-    def get(self, request, project):
-        users = self.get_user(project)
-        serializer = UserSerializer(instance=users, many=True)
+    def get(self, request, profile):
+        users = self.get_user(profile)
+        serializer = ProjectSerializer(instance=users, many=True)
         return Response(serializer.data)
