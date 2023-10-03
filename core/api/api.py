@@ -243,7 +243,7 @@ class ProjectToTask(APIView):
         return task
     
     def get(self, request, project):
-        task = self.get_profile(project)
+        task = self.get_task(project)
         serializer = TaskSerializer(instance=task, many=True)
         return Response(serializer.data)
 
