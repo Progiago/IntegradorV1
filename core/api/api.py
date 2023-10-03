@@ -238,7 +238,7 @@ class Detail_Comment(APIView):
 
 
 class ProjectToTask(APIView):
-    def get_profile(self, project):
+    def get_task(self, project):
         task = Task.objects.filter(project=project)
         return task
     
@@ -246,4 +246,14 @@ class ProjectToTask(APIView):
         task = self.get_profile(project)
         serializer = TaskSerializer(instance=task, many=True)
         return Response(serializer.data)
-        
+
+
+class UserToProject(APIView):
+    def get_user(self, project):
+        user = User.objects.filter(project=project)
+        return user
+
+    def get(self, request, project):
+        users = self.get_user(project)
+        serializer = UserSerializer(instance=users, many=True)
+        return Response(serializer.data)
