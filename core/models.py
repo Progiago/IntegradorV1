@@ -21,21 +21,6 @@ class Project(models.Model):
         return self.title
 
 
-class Filter(models.Model):
-    category_name = models.CharField(max_length=150)
-    TASK_CATEGORY = (
-        ("0", "Tarefa Normal"),
-        ("1", "Atenção"),
-        ("2", "Importante"),
-        ("3", "Urgente")
-    )
-    status = models.CharField(
-        max_length=1,
-        default=0,
-        choices=TASK_CATEGORY
-        )
-
-
 class Team(models.Model):
     team_name = models.CharField(max_length=50)
     project = models.ForeignKey(
@@ -80,6 +65,22 @@ class Task(models.Model):
 
     def __str__(self):
         return "{}, {}".format(self.task_title, self.status)
+
+
+class Tags(models.Model):
+    category_name = models.CharField(max_length=150)
+    TASK_CATEGORY = (
+        ("0", "Tarefa Normal"),
+        ("1", "Atenção"),
+        ("2", "Importante"),
+        ("3", "Urgente")
+    )
+    status = models.CharField(
+        max_length=1,
+        default=0,
+        choices=TASK_CATEGORY
+        )
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
 
 class Checklist(models.Model):

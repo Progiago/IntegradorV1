@@ -214,17 +214,17 @@ class Comment_List(APIView):
 
 
 class Detail_Comment(APIView):
-    def get_profile(self, pk):
+    def get_comment(self, pk):
         comment = Comment.objects.filter(pk=pk).first()
         return comment
     
     def get(self, request, pk):
-        comment = self.get_profile(pk)
+        comment = self.get_comment(pk)
         serializer = CommentSerializer(instance=comment, many=False)
         return Response(serializer.data)
 
     def patch(self, request, pk):
-        comment = self.get_profile(pk)
+        comment = self.get_comment(pk)
         serializer = CommentSerializer(
             instance=comment, data=request.data, many=False)
         serializer.is_valid(raise_exception=True)
@@ -232,7 +232,7 @@ class Detail_Comment(APIView):
         return Response(serializer.data)
 
     def delete(self, request, pk):
-        comment = self.get_profile(pk)
+        comment = self.get_comment(pk)
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -256,4 +256,53 @@ class UserToProject(APIView):
     def get(self, request, profile):
         users = self.get_user(profile)
         serializer = ProjectSerializer(instance=users, many=True)
+        return Response(serializer.data)
+
+
+class Tags_List(APIView):
+    def get(self, request, format=None):
+        tags = Tags.objects.all()
+        serializer = TagsSerializer(tags, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = TagsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Detail_Tags(APIView):
+    def get_tag(self, pk):
+        tags = Tags.objects.filter(pk=pk).first()
+        return tags
+    
+    def get(self, request, pk):
+        tags = self.get_tag(pk)
+        serializer = TagsSerializer(instance=tags, many=False)
+        return Response(serializer.data)
+
+    def patch(self, request, pk):
+        tags = self.get_tag(pk)
+        serializer = TagsSerializer(
+            instance=tags, data=request.data, many=False)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk):
+        comment = self.get_tag(pk)
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+class TagsToTask(APIView):
+    def get_tag(self, task):
+        tag = Tags.objects.filter(task=task)
+        return tag
+
+    def get(self, request, task):
+        tag = self.get_tag(task)
+        serializer = TagsSerializer(instance=tag, many=True)
         return Response(serializer.data)

@@ -54,3 +54,7 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class TagsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tags
+        fields = ['id', 'category_name', 'status', 'task']

@@ -8,7 +8,7 @@ class ProjetoAdmin(admin.ModelAdmin):
     ...
 
 
-@admin.register(Filter)
+@admin.register(Tags)
 class FiltroAdmin(admin.ModelAdmin):
     ...
 
