@@ -37,5 +37,5 @@ urlpatterns = [
     
     path('tags/', api.Tags_List.as_view()),
     
-    path('tags/<int:pk>/Detail_Tags', api.Tags_List.as_view()),
+    path('tags/<int:pk>', api.Detail_Tags.as_view()),
 ]
