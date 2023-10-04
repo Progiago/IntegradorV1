@@ -68,7 +68,6 @@ class Task(models.Model):
 
 
 class Tags(models.Model):
-    category_name = models.CharField(max_length=150)
     TASK_CATEGORY = (
         ("0", "Tarefa Normal"),
         ("1", "Atenção"),
